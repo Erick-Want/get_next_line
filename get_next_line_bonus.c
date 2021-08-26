@@ -6,7 +6,7 @@
 /*   By: ermatheu <ermatheu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 12:46:48 by ermatheu          #+#    #+#             */
-/*   Updated: 2021/08/26 14:55:08 by ermatheu         ###   ########.fr       */
+/*   Updated: 2021/08/26 15:13:18 by ermatheu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,11 @@ char	*get_next_line(int fd)
 	while (temp[aux] != '\n' && temp[aux] != '\0')
 		aux++;
 	backup[fd] = ft_substr(temp, aux + 1, -1);
-	if (temp[0] == '\0')
+	if (backup[fd][0] == '\0')
+	{
 		free(backup[fd]);
+		backup[fd] = 0;
+	}
 	line = ft_substr(temp, 0, aux + 1);
 	free(temp);
 	free(buf_read);
