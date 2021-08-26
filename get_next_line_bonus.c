@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ermatheu <ermatheu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 12:46:48 by ermatheu          #+#    #+#             */
-/*   Updated: 2021/08/26 14:24:16 by ermatheu         ###   ########.fr       */
+/*   Updated: 2021/08/26 14:24:15 by ermatheu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*backup;
+	static char	*backup[256];
 	char		*buf_read;
 	char		*temp;
 	int			verification;
@@ -29,8 +29,8 @@ char	*get_next_line(int fd)
 		free(buf_read);
 		return (NULL);
 	}
-	if (backup)
-		temp = backup;
+	if (backup[fd])
+		temp = backup[fd];
 	else
 		temp = ft_calloc(1, sizeof(char));
 	verification = 1;
@@ -53,7 +53,7 @@ char	*get_next_line(int fd)
 	aux = 0;
 	while (temp[aux] != '\n' && temp[aux] != '\0')
 		aux++;
-	backup = ft_substr(temp, aux + 1, -1);
+	backup[fd] = ft_substr(temp, aux + 1, -1);
 	line = ft_substr(temp, 0, aux + 1);
 	free(temp);
 	free(buf_read);
