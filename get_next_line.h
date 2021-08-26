@@ -6,7 +6,7 @@
 /*   By: ermatheu <ermatheu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 12:52:17 by ermatheu          #+#    #+#             */
-/*   Updated: 2021/08/26 14:26:59 by ermatheu         ###   ########.fr       */
+/*   Updated: 2021/08/26 14:44:11 by ermatheu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# define BUFFER_SIZE 10
+// # define BUFFER_SIZE 10
 
 char	*get_next_line(int fd);
 char	*ft_strchr(const char *s, int c);
