@@ -6,7 +6,7 @@
 /*   By: ermatheu <ermatheu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 12:52:17 by ermatheu          #+#    #+#             */
-/*   Updated: 2021/08/26 14:22:34 by ermatheu         ###   ########.fr       */
+/*   Updated: 2021/08/26 22:28:51 by ermatheu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ char	*get_next_line(int fd);
 char	*ft_strchr(const char *s, int c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 void	*ft_calloc(size_t nmemb, size_t size);
-size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char *s1, char *s2);
+char	*join(int fd, char *buf_read, char *temp);
+char	*alloc_buf(void);
+char	*alloc_and_free(char *temp, char *buf_read, int aux);
 
 #endif
