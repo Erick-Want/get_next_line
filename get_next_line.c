@@ -6,7 +6,7 @@
 /*   By: ermatheu <ermatheu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 12:46:48 by ermatheu          #+#    #+#             */
-/*   Updated: 2021/08/26 21:42:41 by ermatheu         ###   ########.fr       */
+/*   Updated: 2021/08/26 22:24:54 by ermatheu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,18 @@ char	*alloc_buf(void)
 	return (buf_read);
 }
 
+char	*alloc_and_free(char *temp, char *buf_read, int aux)
+{
+	char	*line;
+
+	line = ft_substr(temp, 0, aux + 1);
+	free(temp);
+	free(buf_read);
+	return (line);
+}
+
 char	*get_next_line(int fd)
 {
-	char		*line;
 	static char	*backup;
 	char		*buf_read;
 	char		*temp;
@@ -71,8 +80,10 @@ char	*get_next_line(int fd)
 	while (*temp && temp[aux] != '\n' && temp[aux] != '\0')
 		aux++;
 	backup = ft_substr(temp, aux + 1, -1);
-	line = ft_substr(temp, 0, aux + 1);
-	free(temp);
-	free(buf_read);
-	return (line);
+	if (backup[0] == '\0')
+	{
+		free(backup);
+		backup = 0;
+	}
+	return (alloc_and_free(temp, buf_read, aux));
 }
