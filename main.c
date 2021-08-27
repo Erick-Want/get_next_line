@@ -7,7 +7,7 @@ int main()
 	char *ret;
 
 	fd = open ("text.txt", O_RDONLY);
-	while (ret = get_next_line(fd))
+	while ((ret = get_next_line(fd)))
 		printf("%s", ret);
 	close(fd);
 	return (0);

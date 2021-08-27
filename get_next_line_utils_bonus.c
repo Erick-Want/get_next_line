@@ -6,7 +6,7 @@
 /*   By: ermatheu <ermatheu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 12:56:41 by ermatheu          #+#    #+#             */
-/*   Updated: 2021/08/26 14:14:42 by ermatheu         ###   ########.fr       */
+/*   Updated: 2021/08/27 12:22:48 by ermatheu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,38 +77,26 @@ void	*ft_calloc(size_t nmemb, size_t size)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	ssize_t	i;
+	int		i;
 	char	*str;
-	ssize_t	x;
+	int		x;
 
-	i = ft_strlen(s1);
-	x = ft_strlen(s2);
+	i = 0;
+	while (s1[i] != '\0')
+		i++;
+	x = 0;
+	while (s2[x] != '\0')
+		x++;
 	str = malloc(sizeof(char) * (i + x + 1));
 	if (!str)
 		return (NULL);
-	i = 0;
-	x = 0;
-	while (s1[i] != '\0')
-	{
+	i = -1;
+	x = -1;
+	while (s1[++i] != '\0')
 		str[i] = s1[i];
-		i++;
-	}
-	while (s2[x] != '\0')
-	{
+	while (s2[++x] != '\0')
 		str[x + i] = s2[x];
-		x++;
-	}
 	str[x + i] = '\0';
 	free (s1);
 	return (str);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
 }
