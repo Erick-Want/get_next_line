@@ -6,33 +6,16 @@
 /*   By: ermatheu <ermatheu@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 12:46:48 by ermatheu          #+#    #+#             */
-/*   Updated: 2021/08/26 15:39:04 by ermatheu         ###   ########.fr       */
+/*   Updated: 2021/08/26 21:42:41 by ermatheu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
+char	*join(int fd, char *buf_read, char *temp)
 {
-	char		*line;
-	static char	*backup;
-	char		*buf_read;
-	char		*temp;
-	int			verification;
-	int			aux;
+	int	verification;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 256)
-		return (NULL);
-	buf_read = malloc (sizeof(char) * BUFFER_SIZE + 1);
-	if (!buf_read)
-	{
-		free(buf_read);
-		return (NULL);
-	}
-	if (backup)
-		temp = backup;
-	else
-		temp = ft_calloc(1, sizeof(char));
 	verification = 1;
 	while (verification)
 	{
@@ -50,6 +33,40 @@ char	*get_next_line(int fd)
 		if (ft_strchr(temp, '\n'))
 			break ;
 	}
+	return (temp);
+}
+
+char	*alloc_buf(void)
+{
+	char		*buf_read;
+
+	buf_read = malloc (sizeof(char) * BUFFER_SIZE + 1);
+	if (!buf_read)
+	{
+		free(buf_read);
+		return (NULL);
+	}
+	return (buf_read);
+}
+
+char	*get_next_line(int fd)
+{
+	char		*line;
+	static char	*backup;
+	char		*buf_read;
+	char		*temp;
+	int			aux;
+
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 256)
+		return (NULL);
+	buf_read = alloc_buf();
+	if (backup)
+		temp = backup;
+	else
+		temp = ft_calloc(1, sizeof(char));
+	temp = join(fd, buf_read, temp);
+	if (!temp || !buf_read)
+		return (NULL);
 	aux = 0;
 	while (*temp && temp[aux] != '\n' && temp[aux] != '\0')
 		aux++;
